@@ -1,0 +1,149 @@
+body {
+  color: #000;
+  overflow-x: hidden ;
+  height: 100% !important;
+  background-repeat: no-repeat;
+}
+
+
+.container-fluid {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.card2 {
+  margin: 0px 40px;
+}
+
+
+.image {
+  width: 150px;
+  height: 150px;
+}
+
+.border-line {
+  border-right: 1px solid #C8C8C8;    
+  height: 100%;
+}
+
+
+.line {
+  height: 1px;
+  width: 45%;
+  background-color: #E0E0E0;
+  margin-top: 10px
+}
+
+.or {
+  width: 10%;
+  font-weight: bold
+}
+
+.subhead {
+color: #595959;
+}
+
+.text-sm {
+  font-size: 14px !important;
+  color: #595959;
+}
+
+.text-right {
+  color: #9D081F;
+}
+
+.forget {
+  font-size: 14px !important;
+  color: #9D081F;
+}
+
+
+::placeholder {
+  color: #BDBDBD;
+  opacity: 1;
+  font-weight: 300
+}
+
+:-ms-input-placeholder {
+  color: #BDBDBD;
+  font-weight: 300
+}
+
+::-ms-input-placeholder {
+  color: #BDBDBD;
+  font-weight: 300
+}
+
+input,
+textarea {
+  padding: 10px 12px 10px 12px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  margin-top: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #2C3E50;
+  font-size: 14px;
+  letter-spacing: 1px
+}
+
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #9D081F;
+  outline-width: 0
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0
+}
+
+a {
+  color: inherit;
+  cursor: pointer
+}
+
+.btn-red {
+  width: 100% !important;
+  height: 45px !important;
+  color:black !important;
+  background: #C8C8C8 !important;
+  border-radius: 73px !important;
+  font-weight: 600 !important;
+
+}
+
+.center1{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+@media screen and (max-width: 991px) {
+  .image {
+      width: 150px;
+      height: 150px
+  }
+
+  .border-line {
+      border-right: none
+  }
+
+  .card2 {
+      border-top: 1px solid #EEEEEE !important;
+      margin: 0px 15px
+  }
+}
+
+.errorPage{
+  font-size: 255px;
+  opacity: 0.5;
+  color: #C8C8C8;
+}
