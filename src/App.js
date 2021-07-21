@@ -1,34 +1,75 @@
-import React from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import React, {useReducer, createContext} from 'react'
+import { Route, Switch } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+import "./App.css";
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import Signup from "./components/Signup";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Navbar from "./components/Navbar";
 import Login from "./components/Login";
-import Error from "./components/Error";
+import Signup from "./components/Signup";
+import ErrorPage from "./components/Errorpage";
+import Logout from "./components/Logout";
 
-import"./App.css"
-import { Switch, Route, Redirect } from "react-router-dom";
+import { initialState, reducer } from "./reducer/UseReducer";
 
-const App = () => {
+
+// we create a contextAPI 
+export const UserContext = createContext();
+
+  
+
+const Routing = () => {
+  
   return (
     <>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/Signup" component={Signup} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/contact" component={Contact} />
+       <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
 
-        <Route  component={Error} />
-        <Redirect to="/" />
-      </Switch>
+      <Route path="/about">
+        <About />
+      </Route>
+
+      <Route path="/contact">
+        <Contact />
+      </Route>
+
+      <Route path="/login">
+        <Login />
+      </Route>
+
+      <Route path="/signup">
+        <Signup />
+      </Route>
+        
+      <Route path="/logout">
+        <Logout />
+      </Route>
       
+      <Route>
+        <ErrorPage />
+      </Route>
+    </Switch>
     </>
-  );
-};
+  )
+}
 
-export default App;
+const App = () => {
+
+  //* we use useReducer
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+   
+      <UserContext.Provider value={{state, dispatch}}>
+        
+        <Navbar />
+        <Routing />
+
+      </UserContext.Provider>
+  )
+}
+
+export default App

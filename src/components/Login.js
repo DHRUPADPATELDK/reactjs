@@ -1,85 +1,98 @@
-import React,{useState} from 'react'
-import '../App.css'
-import Logins from '../logo.svg'
-import {useHistory} from 'react-router-dom';
+import React, {useState, useContext} from 'react';
+// import loginpic from "../images/login.svg";
+import { NavLink, useHistory } from "react-router-dom";
 
+import {UserContext} from "../App";
 
 const Login = () => {
+    const { state, dispatch } = useContext(UserContext);
+    
+    const history = useHistory();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const history =useHistory();
-    const [email,setEmail]=useState('')
-    const[password,setPassword]=useState('')
-
-
-    const loginUser = async (e) =>{
+    const loginUser = async (e) => {
         e.preventDefault();
-        
-        // const{email,password} =user
-       
-        const res  =await fetch("/signin",{
-             method:"POST",
-             headers:{
-                 "Content-Type":"application/json"
-               },
-             body:JSON.stringify({
-               email,password
-             })
-         });
-          const data =await res.json();
-   
-          if(res.status===400 || !data ){
-                window.alert("Invalids data")
-                console.log("Invalids data")
-          }else{
-           window.alert("filed data")
-           history.push("/")
-          }
-      }
+
+        const res = await fetch('/signin', {
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
+
+        const data = res.json();
+
+        if (res.status === 400 || !data) {
+            window.alert("Invalid Credentials");
+        } else {
+            dispatch({ type: 'USER', payload: true });
+            window.alert("Login Successfull");
+            history.push("/");
+        }
+    }
 
     return (
-
-
         <>
-          <form method="POST">
-            <div className=" center1 container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto ">
-        <div className="card card0 border-0">
-            <div className="row d-flex">
-                <div className="col-lg-6">
-                        <div className="row justify-content-center border-line align-items-center"> <image src={Logins} className="image" /> </div>
-                </div>
-                
-                <div className="col-lg-6">
-                    <div className="card2 card border-0 px-4 py-5">
-                        <div className="row mb-2 px-3">
-                            <h4 className="mb-0 mr-4 mt-2 mb-2">Sign in </h4>
-                        </div>
-                    
-                        <div className="row px-3"> <label className="mb-1">
-                                <h6 className="mb-2 text-sm">Email</h6>
-                            </label> <input className="mb-4" type="text" name="email"
-                             value={email}
-                             onChange={(e)=>setEmail(e.target.value)}
-                            
-                            /> </div>
-                        <div className="row px-3 mb-3"> <label className="mb-1">
-                                <h6 className="mb-2 text-sm">Password</h6>
-                            </label> <input type="password" name="password"
-                              value={password}
-                              onChange={(e)=>setPassword(e.target.value)}
-
-                            /> </div>
+             <section className="sign-in">
+                <div className="container mt-5">
+                    <div className="signin-content">
+                          
+                            <div className="signin-image">
+                                <figure>
+                                    {/* <img src={loginpic} alt="Login pic" /> */}
+                                </figure>
+                                <NavLink to="/signup" className="signup-image-link">Create an Account</NavLink>
+                            </div>
                        
-                        <div className="row mb-3 px-3"> <button type="submit"  name="signin" id="signin"  value="log in" onClick={loginUser} className="btn btn-red text-center">Sign in</button> </div>
-                        
+                        <div className="signin-form">
+                            <h2 className="form-title">Sign up</h2>
+                            <form method="POST" className="register-form" id="register-form">
+                             
+
+                                 <div className="form-group">
+                                    <label htmlFor="email">
+                                        <i className="zmdi zmdi-email material-icons-name"></i>
+                                    </label>
+                                    <input type="email" name="email" id="email" autoComplete="off"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="Your Email"
+                                    />
+                                </div>
+
+
+                                 <div className="form-group">
+                                    <label htmlFor="password">
+                                        <i className="zmdi zmdi-lock material-icons-name"></i>
+                                    </label>
+                                    <input type="password" name="password" id="password" autoComplete="off"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="Your Password"
+                                    />
+                                </div>
+
+                              
+                                <div className="form-group form-button">
+                                    <input type="submit" name="signin" id="signin" className="form-submit"
+                                        value="Log In"
+                                        onClick={loginUser}
+                                    />
+                                </div>
+
+                            </form>
+                        </div>
+                      
                     </div>
                 </div>
-            </div>
-           
-        </div>
-    </div> 
-    </form>
-        </>
+           </section>
+       </>
     )
 }
 
-export default Login;
+export default Login
